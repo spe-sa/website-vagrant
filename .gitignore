@@ -1,0 +1,6 @@
+
+.vagrant/*
+backups/*
+status/*
+ubuntu/*
+*.log

@@ -121,6 +121,11 @@ if [ -d "$DJANGO_BASE/website" ]; then
 	if [ -f "$DJANGO_BASE/website/requirements.txt" ]; then
 		echo "requirements.txt exists; installing modules from it..."
 		pip install -r ./requirements.txt
+		echo "making pip install files writeable for future updates..."
+		cd /usr/local/lib/python2.7/dist-packages
+		chmod -R g+w *
+		echo "changing back to website directory for further processing..."
+		cd $DJANGO_BASE/website 
 		# /vagrant/scripts/django_setup2.sh >> /tmp/django_setup.out
 		# pulling script in
 		# TODO : fix so we know we provisioned the makemigrations and faked but not have files not checked in...
