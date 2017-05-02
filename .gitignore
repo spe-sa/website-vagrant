@@ -4,3 +4,5 @@ backups/*
 status/*
 ubuntu/*
 *.log
+
+.python-version

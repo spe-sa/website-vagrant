@@ -36,6 +36,7 @@ mkdir -p $DJANGO_BASE/website_static
 
 echo 'setting up databases'
 export MYSQL_PWD=root
+
 echo 'restore django database if it is not already running...'
 mysql -u root django -e 'exit'
 if [ $? -gt 0 ]
@@ -65,6 +66,8 @@ if [ $? -gt 0 ]
 		echo **********
 		mysql -u root -e "update mysql.user set host='%' where user = 'root';"
 		echo **********
+        echo 'attempting to add back users...'
+        mysql -u root django < /vagrant/add_users_back.sql
 		service mysql restart
 		echo 'database provisioning complete...'
 		echo 
@@ -72,7 +75,7 @@ if [ $? -gt 0 ]
 	fi
 	
     touch /vagrant/status/db_provisioned
-  else
+else
     echo 'existing database found; skipping restore...'
     echo 
     echo 
